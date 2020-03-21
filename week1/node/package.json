@@ -1,0 +1,18 @@
+{
+  "name": "week1",
+  "version": "1.0.0",
+  "description": "week1 assignment",
+  "main": "script.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Tests specified: 'create-some-folder', 'start' \" && exit 0",
+    "create-some-folder": "mkdir some && cd some && mkdir other",
+    "start": "nodemon script.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
