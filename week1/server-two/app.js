@@ -7,23 +7,21 @@ const port = 3000
 const pug = require('pug');
 const compiledFunction = pug.compileFile('views/template.pug');
 
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.use(express.static(compiledFunction({
+  name: 'Timothy',
+  age: 6,
+  weight: 5
+})));
 
 app.get('/', (req, res) => res.send('Hello World!'))
-/*app.get('/catinfo', (req, res) => {
+app.get('/catinfo', (req, res) => {
     const cat = {
       'name': 'Frank',
       'age': 6,
       'weight': 5,
     };
     res.json(cat);
-});*/
-app.get('/catinfo', (req, res) => {
-  compiledFunction({
-    name: 'Timothy',
-    age: 6,
-    weight: 5
-  })
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
