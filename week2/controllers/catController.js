@@ -3,16 +3,20 @@
 
 const catModel = require('../models/catModel');
 
-const cats = catModel.cats;
+//const cats = catModel.cats;
 
-const cat_list_get = (req, res) => {
+const cat_list_get = async (req, res) => {
+  const cats = await catModel.getAllCats();
   res.json(cats);
 };
 
-const cat_get = (req, res) => {
-  console.log('cat id parameter', req.params);
-  const cat = cats.filter(cat => cat.id === req.params.id).pop();
+const cat_get = async (req, res) => {
+  const cat = await catModel.getCat(req.params.id);
   res.json(cat);
+
+  /*console.log('cat id parameter', req.params);
+  const cat = cats.filter(cat => cat.id === req.params.id).pop();
+  res.json(cat);*/
 };
 
 const cat_post = (req, res) => {
