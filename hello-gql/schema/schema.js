@@ -185,12 +185,13 @@ const Mutation = new GraphQLObjectType({
                 animalName: {type: new GraphQLNonNull(GraphQLString)}, // add necessary imports
                 species: {type: new GraphQLNonNull(GraphQLID)},
             },
-            resolve: async (parent, args) => {
+            resolve: async (parent, args, {req, res, checkAuth}) => {
                 try {
                     /*const modifiedAnimal = animal.findById(args.id);
                     modifiedAnimal.animalName = args.animalName;
                     modifiedAnimal.species = args.species;
                     return await animal.findByIdAndUpdate(args.id, modifiedAnimal, {new:true});*/
+                    checkAuth(req, res);
                     return await animal.findByIdAndUpdate(args.id, args, {new:true});
                 }
                 catch (e) {
@@ -200,9 +201,8 @@ const Mutation = new GraphQLObjectType({
         },        
     },
 });
-  
- 
- module.exports = new GraphQLSchema({
-   query: RootQuery,
-   mutation: Mutation,
- });
+
+module.exports = new GraphQLSchema({
+    query: RootQuery,
+    mutation: Mutation,
+});
